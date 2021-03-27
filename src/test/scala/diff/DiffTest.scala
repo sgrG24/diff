@@ -22,4 +22,12 @@ class DiffTest extends FlatSpec with Matchers {
 
     diff.stringify should be("A-B+EC+D")
   }
+
+  "stringify2" should "concat adjacent operations into single operation" in {
+    val diff = Diff.generate("ABC", "AECD")
+    val diff2 = Diff.generate("ABCE", "ABCDF")
+
+    diff.stringify2 should be("[A]-[B]+[E][C]+[D]")
+    diff2.stringify2 should be("[ABC]-[E]+[DF]")
+  }
 }

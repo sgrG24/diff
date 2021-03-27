@@ -20,6 +20,23 @@ case class Diff(oldString: String,
     })
   }
 
+  /**
+    * Concat adjacent operations into single operation
+    */
+  def stringify2 = {
+    val stringifyDiff = operations
+      .foldLeft(("", "~"))((pair, op) => {
+        val (diffSoFar, previousOp) = pair
+        if (previousOp.equals(op.symbol)) (diffSoFar + op.element, op.symbol)
+        else {
+          if (diffSoFar.isEmpty) (s"${op.symbol}[${op.element}", op.symbol)
+          else (s"$diffSoFar]${op.symbol}[${op.element}", op.symbol)
+        }
+      })
+      ._1
+    s"$stringifyDiff]"
+  }
+
 }
 
 object Diff {

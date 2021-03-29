@@ -15,10 +15,17 @@ object Dependencies {
   val akkaHttpSession = "com.softwaremill.akka-http-session" %% "core" % "0.5.11"
   val httpStack = akkaStack ++ Seq(scalaMetrics, akkaHttpSession)
 
+  val logbackVersion = "1.1.7"
+  val logbackCore = "ch.qos.logback" % "logback-core" % logbackVersion
+  val logbackClassic = "ch.qos.logback" % "logback-classic" % logbackVersion
+  val slf4jApi = "org.slf4j" % "slf4j-api" % "1.7.30"
+  val scalaLogging = "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2"
+  val loggingStack = Seq(logbackCore, logbackClassic, slf4jApi, scalaLogging)
+
   val scalaTest = "org.scalatest" %% "scalatest" % "3.0.8"
   val mockito = "org.mockito" % "mockito-core" % "3.3.0"
 
   val testStack = Seq(mockito, scalaTest)
 
-  val diffDependencies = httpStack ++ testStack
+  val diffDependencies = httpStack ++ testStack ++ loggingStack
 }

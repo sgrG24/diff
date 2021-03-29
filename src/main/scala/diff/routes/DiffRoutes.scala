@@ -11,7 +11,7 @@ case class DiffRequest(original: String, modified: String)
 
 trait DiffFormats extends DefaultJsonProtocol {
   implicit val diffResponseFormat = jsonFormat3(DiffResponse)
-  implicit val diffRequestFormat = jsonFormat2(DiffRequest.apply)
+  implicit val diffRequestFormat  = jsonFormat2(DiffRequest.apply)
 }
 
 trait DiffRoutes extends SprayJsonSupport with DiffFormats {

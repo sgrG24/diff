@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  description: "API specification for the [Diff](https://github.com/sgrG24/diff)"
+  title: "Diff"
+  contact:
+    email: sagargupta2405@gmail.com
+    url: 'https://github.com/sgrG24/diff'
+
+paths:
+  /diff:
+    post:
+      tags:
+        - "Diff"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiffRequest'
+        description: Diff request
+        required: true
+      summary: Generate diff between original and modified text
+      description: ""
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiffResponse'
+
+  /health:
+    get:
+      tags:
+        - "Ops"
+      summary: Get health of the system
+      description: ""
+      responses:
+        '200':
+          description: Success
+
+components:
+  schemas:
+
+    DiffRequest:
+      type: object
+      example:
+        {
+          "original": "This is original text",
+          "modified": "This is Modified Text"
+        }
+
+    DiffResponse:
+      type: object
+      example:
+        {
+          "diff": "This is Diff text",
+          "original": "This is original text",
+          "modified": "This is Modified Text"
+        }

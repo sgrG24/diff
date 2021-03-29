@@ -7,6 +7,8 @@ import akka.stream.ActorMaterializer
 import com.typesafe.scalalogging.StrictLogging
 import diff.routes.{DiffRoutes, SwaggerRoutes}
 import akka.http.scaladsl.server.Directives._
+import com.codahale.metrics.health.HealthCheckRegistry
+import diff.routes.health.HealthCheckRoutes
 
 import scala.concurrent.Future
 
@@ -32,10 +34,12 @@ object Main
     extends App
     with DiffRoutes
     with SwaggerRoutes
+    with HealthCheckRoutes
     with AkkaServer
     with StrictLogging {
 
-  val routes = diffRoutes ~ swaggerRoutes
+  val registry = new HealthCheckRegistry()
+  val routes = diffRoutes ~ swaggerRoutes ~ healthCheckRoutes
 
   bind("0.0.0.0", 8081, routes)
   logger.info("Server up and running at http://0.0.0.0:8081")

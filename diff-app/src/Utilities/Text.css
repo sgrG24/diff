@@ -1,0 +1,16 @@
+.text__red {
+  display: inline;
+  background-color: #FF8983;
+  letter-spacing: 1.5px
+}
+
+.text__normal {
+  display: inline;
+  letter-spacing: 1px
+}
+
+.text__green {
+  display: inline;
+  background-color: #6BDFB7;
+  letter-spacing: 1.5px
+}
